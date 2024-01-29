@@ -30,7 +30,7 @@ protected:
         for (i = 1; i < n.size(); i++) {
             if (n[i] == '+' || n[i] == '-' || n[i] == '*' || n[i] == '/') {
                 list[0] = stod(n.substr(0, i));
-                list[1] = stod(n.substr(i+1, n.size()+1));
+                list[1] = stod(n.substr(i+1, n.size()-i-1));
                 break;
             }
         }
@@ -59,6 +59,8 @@ protected:
                     if ((this->signs.find(x[i]) != string::npos) && (this->signs.find(x[i-1]) == string::npos)) {
                         id[count] = i;
                         count += 1;
+                    } if (i > x.size()-1) {
+                        break;
                     }
                 }
             if (((x.find("+") == string::npos) && (x.find("-") == string::npos) && (x.find("*") == string::npos) && (x.find("/") == string::npos)) || ((this->signs.find(x[1]) != string::npos) && (id[1] == x.size()-1))) {
@@ -73,7 +75,7 @@ protected:
             }
             n = number(expression(x.substr(id[0]+1, id[2]-id[0]-1)));
             x.erase(id[0]+1, id[2]-id[0]-1);
-            x = x.insert(id[0]+1, n);
+            x.insert(id[0]+1, n);
             count = 0;
             id[0] = 0;
             id[1] = 0;
@@ -97,7 +99,7 @@ protected:
                     }
                     n = all_expressions(x.substr(id[0], id[1]-id[0]+1));
                     x.erase(id[0], id[1]-id[0]+1);
-                    x = x.insert(id[0], n);
+                    x.insert(id[0], n);
                     count = 0;
                     id[0] = 0;
                     id[1] = 0;
