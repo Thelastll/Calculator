@@ -63,7 +63,7 @@ protected:
                         break;
                     }
                 }
-            if (((x.find("+") == string::npos) && (x.find("-") == string::npos) && (x.find("*") == string::npos) && (x.find("/") == string::npos)) || ((this->signs.find(x[1]) != string::npos) && (id[1] == x.size()-1))) {
+            if (id[1] == x.size()-1) {
                 return number(x.substr(1, x.size()-2));
             } else {
                 priority = (x.find("*") != string::npos) || (x.find("/") != string::npos);
